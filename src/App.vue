@@ -1,15 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <select @change="selectCategory($event)">
+      <option>--SELECT--</option>
+      <option value="unique">Unique</option>
+      <option value="notunique">Notunique</option>
+    </select>
+  </div>
+  <div v-if="this.value==='unique'">
+    <unique/>
+  </div>
+  <div v-else-if="this.value==='notunique'">
+    <notunique/>
+  </div>
+  <div v-else>
+    <h1>Wybierz </h1>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Unique from "@/components/unique";
+import Notunique from "@/components/notunique";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Notunique,
+    Unique
+  },
+  data(){
+    return{
+      value:null
+    }
+  },
+  methods:{
+    selectCategory(event){
+      console.log(event.target.value);
+      this.value=event.target.value;
+    }
   }
 }
 </script>
